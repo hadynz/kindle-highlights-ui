@@ -1,19 +1,20 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
 
-import reducers from './reducers';
-import mySaga from './sagas';
+import reducers from "../reducers";
+import mySaga from "../sagas";
 
 export default function createStoreWithMiddleware() {
   // Define middlewares to include
   const sagaMiddleware = createSagaMiddleware();
+
   // Add all middlewares into an array
   const middleware = [sagaMiddleware];
 
   // Add the Redux dev tools and middleware code together
   const enhancers = compose(
     applyMiddleware(...middleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
   // Create a store with the reducers and middleware

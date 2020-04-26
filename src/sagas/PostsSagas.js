@@ -1,10 +1,10 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
+import { call, put, takeEvery } from "redux-saga/effects";
+import axios from "axios";
 
-import { types } from '../actions';
+import { types } from "../actions";
 
-const ROOT_URL = '//reduxblog.herokuapp.com/api';
-const API_KEY = '?key=cseckler1234';
+const ROOT_URL = "//reduxblog.herokuapp.com/api";
+const API_KEY = "?key=cseckler1234";
 
 // Watcher sagas
 // Listen for an action and run the appropriate Worker saga
@@ -27,6 +27,7 @@ export function* watchDeletePost() {
 // Worker sagas
 // Respond to the actions that are caught by the watcher sagas
 export function* workFetchPosts() {
+  console.log("workFetchPosts");
   try {
     // Try to call the API
     const uri = `${ROOT_URL}/posts${API_KEY}`;
@@ -35,15 +36,16 @@ export function* workFetchPosts() {
     // Dispatch the action to the reducers
     yield put({
       type: types.FETCH_POSTS_SUCCESS,
-      payload: response.data
+      payload: response.data,
     });
   } catch (error) {
     // Act on the error
-    console.log('Request failed! Could not fetch posts.');
+    console.log("Request failed! Could not fetch posts.");
   }
 }
 
 export function* workFetchPost({ id }) {
+  console.log("workFetchPost");
   try {
     // Try to call the API
     const uri = `${ROOT_URL}/posts/${id}${API_KEY}`;
@@ -52,15 +54,16 @@ export function* workFetchPost({ id }) {
     // Dispatch the action to the reducers
     yield put({
       type: types.FETCH_POST_SUCCESS,
-      payload: response.data
+      payload: response.data,
     });
   } catch (error) {
     // Act on the error
-    console.log('Request failed! Could not fetch post.');
+    console.log("Request failed! Could not fetch post.");
   }
 }
 
 export function* workCreatePost({ values, callback }) {
+  console.log("workCreatePost");
   try {
     // Try to call the API
     const uri = `${ROOT_URL}/posts${API_KEY}`;
@@ -71,15 +74,16 @@ export function* workCreatePost({ values, callback }) {
     // Dispatch the action to the reducers
     yield put({
       type: types.CREATE_POST_SUCCESS,
-      payload: response.data
+      payload: response.data,
     });
   } catch (error) {
     // Act on the error
-    console.log('Request failed! Could not create post.');
+    console.log("Request failed! Could not create post.");
   }
 }
 
 export function* workDeletePost({ id, callback }) {
+  console.log("workDeletePost");
   try {
     // Try to call the API
     const uri = `${ROOT_URL}/posts/${id}${API_KEY}`;
@@ -90,10 +94,10 @@ export function* workDeletePost({ id, callback }) {
     // Dispatch the action to the reducers
     yield put({
       type: types.DELETE_POST_SUCCESS,
-      payload: response.data
+      payload: response.data,
     });
   } catch (error) {
     // Act on the error
-    console.log('Request failed! Could not delete post.');
+    console.log("Request failed! Could not delete post.");
   }
 }

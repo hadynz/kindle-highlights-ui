@@ -1,11 +1,11 @@
-import 'regenerator-runtime/runtime';
+import "regenerator-runtime/runtime";
 
 import {
   watchFetchPosts,
   watchFetchPost,
   watchCreatePost,
-  watchDeletePost
-} from './PostsSagas';
+  watchDeletePost,
+} from "./PostsSagas";
 
 // Root sagas
 // Single entry point to start all sagas at once
@@ -14,6 +14,6 @@ export default function* rootSaga() {
     watchFetchPosts(),
     watchFetchPost(),
     watchCreatePost(),
-    watchDeletePost()
+    watchDeletePost(),
   ];
 }

@@ -6,6 +6,7 @@ import { fetchPost, deletePost } from "../actions";
 
 class PostsShow extends Component {
   componentDidMount() {
+    console.log('posts show');
     this.props.fetchPost(this.props.match.params.id);
   }
 
