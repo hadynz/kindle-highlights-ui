@@ -1,7 +1,7 @@
 import "regenerator-runtime/runtime";
 import { all } from "redux-saga/effects";
 
-import { watchFetchBooks } from "./booksSagas";
+import { watchFetchBooks } from "./bookSagas";
 import { watchFetchBookHighlights } from "./bookHighlightSagas";
 
 // Root sagas
