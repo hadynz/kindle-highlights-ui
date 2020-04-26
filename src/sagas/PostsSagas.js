@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+
 import { types } from '../actions';
 
 const ROOT_URL = '//reduxblog.herokuapp.com/api';
