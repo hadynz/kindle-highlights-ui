@@ -4,7 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import * as serviceWorker from "./serviceWorker";
-import booksIndex from "./components/BooksIndex";
+import BooksIndex from "./components/BooksIndex";
+import BookDetail from "./components/BookDetail";
 
 import configureStore from "./store";
 const store = configureStore();
@@ -15,7 +16,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/" component={booksIndex} />
+          <Route path="/books/:id" component={BookDetail} />
+          <Route path="/" component={BooksIndex} />
         </Switch>
       </div>
     </BrowserRouter>
