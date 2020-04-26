@@ -3,7 +3,6 @@ import { mapKeys } from "lodash";
 import { types } from "../actions";
 
 export default (state = {}, action) => {
-  console.log('inside reducer', action);
   switch (action.type) {
     case types.FETCH_POST_SUCCESS:
       // Copy the current state and set a new property with a dynamic key value and the payload as the value
@@ -20,7 +19,6 @@ export default (state = {}, action) => {
       delete newState[action.payload.id];
       return newState;
     default:
-      console.log('default return');
       return state;
   }
 };
