@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 import { fetchBook, fetchBookHighlights } from "../actions";
@@ -11,6 +11,9 @@ import { fetchBook, fetchBookHighlights } from "../actions";
 const useStyles = (theme) => ({
   card: {
     marginBottom: 20,
+  },
+  title: {
+    fontSize: 14,
   },
 });
 
@@ -25,7 +28,16 @@ class BookDetail extends Component {
 
     return bookHighlights.map((h) => (
       <Card key={h.bookHighlightId} className={classes.card}>
-        <CardContent>{h.text}</CardContent>
+        <CardContent>
+          <Typography
+            className={classes.title}
+            color="textSecondary"
+            gutterBottom
+          >
+            {h.locationPercentage}
+          </Typography>
+          <Typography>{h.text}</Typography>
+        </CardContent>
       </Card>
     ));
   }
@@ -39,9 +51,9 @@ class BookDetail extends Component {
 
     return (
       <Container maxWidth="sm">
-        <Link to="/">Back to Index</Link>
-        <h3>{book.title}</h3>
-        <h4>Highlights</h4>
+        <Typography variant="h5" gutterBottom>
+          {book.title}
+        </Typography>
         {this.renderHighlights()}
       </Container>
     );
