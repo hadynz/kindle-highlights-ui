@@ -2,20 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { fetchBookHighlights } from "../actions";
+import { fetchBook, fetchBookHighlights } from "../actions";
 
 class BookDetail extends Component {
   componentDidMount() {
+    this.props.fetchBook(this.props.match.params.id);
     this.props.fetchBookHighlights(this.props.match.params.id);
   }
 
   render() {
     const { book, bookHighlights } = this.props;
 
-    console.log("book", book);
-    console.log("bookHighlights", bookHighlights);
-
-    if (!bookHighlights) {
+    if (!book || !bookHighlights) {
       return <div>Loading...</div>;
     }
 
@@ -37,4 +35,6 @@ const mapStateToProps = (state, ownProps) => ({
   bookHighlights: state.bookHighlights[ownProps.match.params.id],
 });
 
-export default connect(mapStateToProps, { fetchBookHighlights })(BookDetail);
+export default connect(mapStateToProps, { fetchBookHighlights, fetchBook })(
+  BookDetail
+);
