@@ -1,13 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Container from "@material-ui/core/Container";
+import { withStyles } from "@material-ui/core/styles";
 
 import { fetchBook, fetchBookHighlights } from "../actions";
+
+const useStyles = (theme) => ({
+  card: {
+    marginBottom: 20,
+  },
+});
 
 class BookDetail extends Component {
   componentDidMount() {
     this.props.fetchBook(this.props.match.params.id);
     this.props.fetchBookHighlights(this.props.match.params.id);
+  }
+
+  renderHighlights() {
+    const { bookHighlights, classes } = this.props;
+
+    return bookHighlights.map((h) => (
+      <Card key={h.bookHighlightId} className={classes.card}>
+        <CardContent>{h.text}</CardContent>
+      </Card>
+    ));
   }
 
   render() {
@@ -18,14 +38,12 @@ class BookDetail extends Component {
     }
 
     return (
-      <div>
+      <Container maxWidth="sm">
         <Link to="/">Back to Index</Link>
         <h3>{book.title}</h3>
         <h4>Highlights</h4>
-        {bookHighlights.map((h) => (
-          <div key={h.bookHighlightId}>{h.text}</div>
-        ))}
-      </div>
+        {this.renderHighlights()}
+      </Container>
     );
   }
 }
@@ -36,5 +54,5 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, { fetchBookHighlights, fetchBook })(
-  BookDetail
+  withStyles(useStyles)(BookDetail)
 );
