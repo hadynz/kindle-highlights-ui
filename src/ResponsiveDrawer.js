@@ -6,7 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import LabelIcon from "@material-ui/icons/Label";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -75,12 +75,12 @@ function ResponsiveDrawer(props) {
         </ListItem>
       </List>
       <Divider />
-      <List>
+      <List
+        subheader={<ListSubheader>Highlight tags</ListSubheader>}
+        dense={true}
+      >
         {["#leadership", "#empathy"].map((text, index) => (
           <ListItem button key={index}>
-            <ListItemIcon>
-              <LabelIcon />
-            </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
