@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 
-import ResponsiveDrawer from "../ResponsiveDrawer";
+import AppLayout from "../components/AppLayout";
 
 /**
  * Good reference for extending layout to take into account auth layout
@@ -13,9 +13,9 @@ export default function RouteWrapper({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) => (
-        <ResponsiveDrawer>
+        <AppLayout>
           <Component {...props} />
-        </ResponsiveDrawer>
+        </AppLayout>
       )}
     />
   );

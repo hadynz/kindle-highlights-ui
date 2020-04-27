@@ -6,7 +6,7 @@ import { Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { map as _map } from "lodash";
 
-import { fetchBooks } from "../actions";
+import { fetchBooks } from "../../actions";
 
 const useStyles = (theme) => ({
   link: {

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ResponsiveDrawer(props) {
+function AppLayout(props) {
   const { children } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -146,8 +146,8 @@ function ResponsiveDrawer(props) {
   );
 }
 
-ResponsiveDrawer.propTypes = {
+AppLayout.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default ResponsiveDrawer;
+export default AppLayout;

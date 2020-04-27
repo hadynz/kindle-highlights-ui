@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Container from "@material-ui/core/Container";
+import Chip from "@material-ui/core/Chip";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
-import { fetchBook, fetchBookHighlights } from "../actions";
+import { fetchBook, fetchBookHighlights } from "../../actions";
 
 const useStyles = (theme) => ({
   root: {
@@ -30,6 +32,8 @@ class BookDetail extends Component {
     this.props.fetchBook(this.props.match.params.id);
     this.props.fetchBookHighlights(this.props.match.params.id);
   }
+
+  handleDelete() {}
 
   renderHighlights() {
     const { bookHighlights, classes } = this.props;
@@ -53,6 +57,9 @@ class BookDetail extends Component {
             </IconButton>
           </div>
         </div>
+        <CardActions>
+          <Chip size="small" label="Basic" onDelete={this.handleDelete} />
+        </CardActions>
       </Card>
     ));
   }
