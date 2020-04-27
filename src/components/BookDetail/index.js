@@ -5,6 +5,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Container from "@material-ui/core/Container";
 import Chip from "@material-ui/core/Chip";
+import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
@@ -13,14 +14,17 @@ import { withStyles } from "@material-ui/core/styles";
 import { fetchBook, fetchBookHighlights } from "../../actions";
 
 const useStyles = (theme) => ({
-  root: {
+  card: {
     marginBottom: 20,
   },
-  details: {
+  cardDetails: {
     display: "flex",
   },
-  actions: {
-    width: 100,
+  cardContent: {
+    flexGrow: 1,
+  },
+  bookContainer: {
+    width: 140,
   },
   secondaryTitle: {
     fontSize: 14,
@@ -39,9 +43,9 @@ class BookDetail extends Component {
     const { bookHighlights, classes } = this.props;
 
     return bookHighlights.map((h) => (
-      <Card key={h.bookHighlightId} className={classes.root}>
-        <div className={classes.details}>
-          <CardContent>
+      <Card key={h.bookHighlightId} className={classes.card}>
+        <div className={classes.cardDetails}>
+          <CardContent className={classes.cardContent}>
             <Typography
               className={classes.secondaryTitle}
               color="textSecondary"
@@ -51,7 +55,7 @@ class BookDetail extends Component {
             </Typography>
             <Typography>{h.text}</Typography>
           </CardContent>
-          <div className={classes.actions}>
+          <div>
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
@@ -64,6 +68,26 @@ class BookDetail extends Component {
     ));
   }
 
+  renderBook() {
+    const { book } = this.props;
+    return (
+      <React.Fragment>
+        <img src={book.imageUrl} alt={book.title} />
+        <Typography variant="body1" noWrap={true} color="textPrimary">
+          {book.title}
+        </Typography>
+        <Typography
+          variant="body2"
+          noWrap={true}
+          color="textSecondary"
+          gutterBottom
+        >
+          {book.author}
+        </Typography>
+      </React.Fragment>
+    );
+  }
+
   render() {
     const { book, bookHighlights } = this.props;
 
@@ -72,11 +96,15 @@ class BookDetail extends Component {
     }
 
     return (
-      <Container maxWidth="sm">
-        <Typography variant="h5" gutterBottom>
-          {book.title}
-        </Typography>
-        {this.renderHighlights()}
+      <Container maxWidth="md">
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={3}>
+            {this.renderBook()}
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            {this.renderHighlights()}
+          </Grid>
+        </Grid>
       </Container>
     );
   }
